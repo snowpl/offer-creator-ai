@@ -1,4 +1,5 @@
 import json
+import os
 from langchain.prompts import PromptTemplate
 
 #This is for local-only in a real-world system it would be best to adust this to a redis-based
@@ -14,7 +15,9 @@ class PromptManager:
     
     def _load_prompts(self):
         try:
-            with open("prompts.json", "r") as file:
+            base_dir = os.path.dirname(__file__)  # Directory of the current script
+            file_path = os.path.join(base_dir, "prompts.json")
+            with open(file_path, "r") as file:
                 self.prompts = json.load(file)["prompts"]
         except FileNotFoundError:
             raise RuntimeError("Prompts files not found. Please make sure the file exists.")
@@ -37,4 +40,11 @@ class PromptManager:
         return PromptTemplate(
             input_variables=prompt["input_variables"],
             template=prompt["template"]
+        )
+    
+    def get_no_detected_intent_prompt(self) -> PromptTemplate:
+        prompt = self._get_prompt("no_detected_intent")
+        return PromptTemplate(
+            template=prompt["template"],
+            input_variables=prompt["input_variables"]
         )

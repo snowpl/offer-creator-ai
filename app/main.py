@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from core.config import settings
-from presentation.fastapi_router import api_router
+from app.config import settings
 from app.domain.prompts.prompt_manager import PromptManager
+from app.presentation.fastapi_router import api_router
 
 # Initialize FastAPI app
 app = FastAPI(

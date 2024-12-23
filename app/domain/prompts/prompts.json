@@ -1,0 +1,26 @@
+{
+    "prompts": {
+      "email_intent_classification": {
+        "current_version": "1.0",
+        "versions": {
+          "1.0": {
+            "template": "Sklasyfikuj wiadomość użytkownika do poniższych intentów.\nIntenty mogą posiadać dodatkowe parametry.\n\nPoczątek treści wiadomości:\n```\n{USER_MESSAGE}\n```\nKoniec treści wiadomości.\n\nPoniżej znajduje się opis intentów, które mają być używane:\n\nwyszukiwanie_mieszkan – Gdy użytkownik pyta o dostępność mieszkań, garaży lub miejsc postojowych, ich układ, liczbę pokoi, metraż, położenie, preferowaną ekspozycję, czy też o specyficzne mieszkania w inwestycji.\nprosba_o_kontakt – Kiedy użytkownik prosi o kontakt telefoniczny, mailowy lub osobiste spotkanie, aby omówić szczegóły oferty lub umówić się na rozmowę.\nstaly_klient - Gdy użytkownik wspomina o tym, że jest stałym klientem.\nbrak_sklasyfikowania - Jeśli wiadomość nie jest odpowiednia dla żadnego intenta.\n\nPodaj intenty, tylko intenty oddzielone przecinkiem:",
+            "input_variables": ["USER_MESSAGE"],
+            "description": "Classify user messages into predefined intents based on the email content.",
+            "last_updated": "2024-12-23"
+          }
+        }
+      },
+      "no_detected_intent": {
+      "current_version": "1.0",
+      "versions": {
+        "1.0": {
+          "template": "Wygeneruj wiadomosc, w ktorej poinformujesz, ze nie jestes obecnie w stanie odpowiedziec na pytanie oraz zapytasz sie, czy klient życzy sobie dalszej interakcji z asystentem AI czy chce przekierowania wiadomosci do doradcy.\n\nWiadomosc musi byc krotka.\nRezultatem musi byc pojedyncze zdanie.\nKazde zdanie musi zostac zakonczone poprawnym znakiem interpunkcyjnym.\nWiadomosc musi byc uniwersalna dla obu plci (Pan/Pani).\nNie uzywaj znaku ; w odpowiedziach.",
+          "input_variables": [],
+          "description": "Generate a short response when unable to answer a question and ask the user if they want AI assistance or human support.",
+          "last_updated": "2024-12-23"
+        }
+      }
+    }
+  }
+}
