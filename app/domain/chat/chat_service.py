@@ -21,7 +21,6 @@ class ChatService():
         self.llm_client = llm_client
         self.prompt_manager = prompt_manager
         print(prompt_manager)
-        print(self)
         #self.token_watcher = token_watcher
         # self._strategies = strategies || , strategies: List[IIntentStrategy]
 
@@ -41,10 +40,10 @@ class ChatService():
         print('got template')
         formatted_prompt = promptTemplate.format(USER_MESSAGE=utterance)
         print(formatted_prompt)
-        intents_array = await self._llm_client.generate_message_async(formatted_prompt, "text")
+        intents_array = await self.llm_client.generate_message_async(formatted_prompt, "text")
         return re.sub(r"\s+", "", intents_array).split(',')
     
     async def get_no_detected_intent_message(self) -> str:
         promptTemplate = self.prompt_manager.get_no_detected_intent_prompt()
-        return await self._llm_client.generate_message_async(promptTemplate.format(), "text")
+        return await self.llm_client.generate_message_async(promptTemplate.format(), "text")
     

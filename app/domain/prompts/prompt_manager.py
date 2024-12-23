@@ -5,8 +5,8 @@ from langchain.prompts import PromptTemplate
 #This is for local-only in a real-world system it would be best to adust this to a redis-based
 class PromptManager:
     prompts = {}
-    def __new__(self):
-        self._load_prompts(self)
+    def __init__(self):
+        self._load_prompts()
         pass
     
     def _load_prompts(self):

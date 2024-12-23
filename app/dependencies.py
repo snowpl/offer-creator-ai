@@ -8,7 +8,7 @@ from app.domain.prompts.prompt_manager import PromptManager;
 
 container = Container()
 
-container[PromptManager] = Singleton(PromptManager)
+container[PromptManager] = PromptManager
 container[TokenWatcher] = TokenWatcher
 container[GptClient] = lambda c: GptClient(settings, token_watcher=c[TokenWatcher])
 container[ChatService] = lambda c: ChatService(llm_client=c[GptClient], prompt_manager=c[PromptManager])
