@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.v1.endpoints import router
+from app.api.v1.ai_chat import router
 
 # Create the main API router
 api_router = APIRouter()
