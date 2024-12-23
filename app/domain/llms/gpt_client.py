@@ -4,9 +4,6 @@ import requests
 from typing import Dict, Protocol
 from app.domain.llms.tokens import TokenWatcher
 
-def get_gpt_client():
-    return GptClient()
-
 class ILlmClient(Protocol):
     async def generate_message_async(self, prompt: str, response_type: str):
         pass
