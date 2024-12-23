@@ -7,7 +7,7 @@ router = APIRouter()
 @router.post("/generate-utterance", summary="Generates reply based on AI", response_model=None)
 async def create_example(
     message: str,
-    service: ChatService = Depends()
+    service: ChatService = Depends(ChatService)
     ) -> HandleChatResponse:
     """
     Get reply from the LLM.

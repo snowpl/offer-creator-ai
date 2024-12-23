@@ -11,28 +11,11 @@ app = FastAPI(
     version=settings.API_VERSION,
 )
 
-# Integrate Lagom with FastAPI
-lagom = FastApiIntegration(container)
-
 # Include API routes
 app.include_router(api_router)
-# Middleware, event handlers, or any other app configuration can go here
 
-@app.on_event("startup")
-async def startup_event():
-    """
-    Actions to perform when the application starts.
-    For example, database connections or preloading data.
-    """
-    print("Application startup logic here.")
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """
-    Actions to perform when the application is shutting down.
-    For example, cleaning up resources or closing connections.
-    """
-    print("Application shutdown logic here.")
+# Integrate Lagom with FastAPI
+lagom = FastApiIntegration(container)
 
 # For running locally, uncomment below:
 # if __name__ == "__main__":

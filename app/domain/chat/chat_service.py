@@ -15,10 +15,6 @@ class HandleChatResponse(BaseModel):
         conversation_status: str
         token_consumption: TokenConsumption
 
-class IChatService(Protocol):
-    async def handle_chat_response(self, utterance: str) -> HandleChatResponse:
-        pass
-
 # class IIntentStrategy(Protocol):
 #     @property
 #     def intent_name(self) -> str:
@@ -28,10 +24,11 @@ class IChatService(Protocol):
 #         pass
 
 class ChatService():
-    def __init__(self, llm_client: GptClient = Depends(), prompt_manager: PromptManager = Depends(PromptManager)):
+    def __init__(self, llm_client: GptClient = Depends(GptClient), prompt_manager: PromptManager = Depends(PromptManager)):
         self = self
         self.llm_client = llm_client
         self.prompt_manager = prompt_manager
+        print(self.prompt_manager)
         #self.token_watcher = token_watcher
         # self._strategies = strategies || , strategies: List[IIntentStrategy]
 
