@@ -1,15 +1,16 @@
 
 import json
+from fastapi import Depends
 import requests
 from typing import Dict, Protocol
-from app.domain.llms.tokens import TokenWatcher
+from app.domain.llms.tokens import ITokenWatcher, TokenWatcher
 
 class ILlmClient(Protocol):
     async def generate_message_async(self, prompt: str, response_type: str):
         pass
 
 class GptClient(ILlmClient):
-    def __init__(self, llm_settings: Dict, token_watcher: TokenWatcher):
+    def __init__(self, llm_settings: Dict, token_watcher: ITokenWatcher = Depends(TokenWatcher)):
         self.llm_settings = llm_settings
         self.token_watcher = token_watcher
 

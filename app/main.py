@@ -1,7 +1,8 @@
 from fastapi import FastAPI
+from lagom.integrations.fast_api import FastApiIntegration
 from app.config import settings
-from app.domain.prompts.prompt_manager import PromptManager
 from app.presentation.fastapi_router import api_router
+from app.dependencies import container
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -9,14 +10,12 @@ app = FastAPI(
     description="An API built with Domain-Driven Design principles",
     version=settings.API_VERSION,
 )
-prompt_manager = PromptManager()
 
-def get_prompt_manager() -> PromptManager:
-    return prompt_manager
+# Integrate Lagom with FastAPI
+lagom = FastApiIntegration(container)
 
 # Include API routes
 app.include_router(api_router)
-
 # Middleware, event handlers, or any other app configuration can go here
 
 @app.on_event("startup")

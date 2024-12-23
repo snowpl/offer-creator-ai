@@ -4,14 +4,10 @@ from langchain.prompts import PromptTemplate
 
 #This is for local-only in a real-world system it would be best to adust this to a redis-based
 class PromptManager:
-    _instance =None #Singleton instance
     prompts = {}
-
     def __new__(self):
-        if self._instance is None:
-            self._instance = super(PromptManager, self).__new__(self)
-            self._instance._load_prompts()
-        return self._instance
+        self._load_prompts(self)
+        pass
     
     def _load_prompts(self):
         try:
@@ -23,6 +19,7 @@ class PromptManager:
             raise RuntimeError("Prompts files not found. Please make sure the file exists.")
     
     def _get_prompt(self, prompt_name, version=None):
+        print(self.prompts)
         if prompt_name not in self.prompts:
             raise ValueError("Prompt '{prompt_name}' not found.")
         
@@ -36,6 +33,7 @@ class PromptManager:
         return prompt_data["versions"][version]
     
     def get_email_intent_classification_prompt(self) -> PromptTemplate:
+        print('hello from Prompt Manager')
         prompt = self._get_prompt("email_intent_classification")
         return PromptTemplate(
             input_variables=prompt["input_variables"],
